@@ -1,13 +1,15 @@
 import pygame
 import sys
 import image
+from const import *
+import objectbase
 pygame.init()
 
 
 # 创建窗口
-DS = pygame.display.set_mode((1280, 600))
-img = image.Image('pic/other/back.png',(0,0),(1280, 600))
-img_zb = image.Image('pic/zombie/0/0.png',(1280,200),(100, 128))
+DS = pygame.display.set_mode(GAME_SIZE)
+img = image.Image(PATH_BACK,0,(0,0),GAME_SIZE,0)
+zombie = objectbase.ObjectBase('pic/zombie/0/%d.png',0,(1280,200),(100, 128),15)
 while True:
 
     for event in pygame.event.get():
@@ -17,6 +19,7 @@ while True:
             #R G B
     DS.fill((255, 0, 255))
     img.draw(DS)
-    img_zb.doleft(0.3)
-    img_zb.draw(DS)
+    zombie.doleft(0.3)
+    zombie.draw(DS)
+    zombie.updateIndex((zombie.pathIndex+1)%15)
     pygame.display.update()
