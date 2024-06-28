@@ -8,6 +8,9 @@ class ObjectBase(image.Image):
     
 
     def update(self):
+        """
+        优先调用子类方法
+        """
         self.checkImageIndex()
         self.checkPosition()    
 
@@ -34,10 +37,8 @@ class ObjectBase(image.Image):
         自驱动平移动画
         """
         if(time.time()-self.prePostime)<0.2:
-            return
+            return False
         self.prePostime=time.time()
         
-        self.pos[0] -=2
+        return True
 
-
-        pass
