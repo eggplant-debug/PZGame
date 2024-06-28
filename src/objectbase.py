@@ -7,6 +7,12 @@ class ObjectBase(image.Image):
         self.prePostime=0
     
 
+    def getPositionCD(self):
+        """
+        给子类提供类似接口
+        """
+        pass
+
     def update(self):
         """
         优先调用子类方法
@@ -36,9 +42,10 @@ class ObjectBase(image.Image):
         """
         自驱动平移动画
         """
-        if(time.time()-self.prePostime)<0.2:
+        if(time.time()-self.prePostime) < self.getPositionCD():
             return False
         self.prePostime=time.time()
         
         return True
 
+        
