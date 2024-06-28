@@ -3,13 +3,14 @@ import sys
 import image
 from const import *
 import objectbase
+import zombiebase
 pygame.init()
 
 
 # 创建窗口
 DS = pygame.display.set_mode(GAME_SIZE)
 img = image.Image(PATH_BACK,0,(0,0),GAME_SIZE,0)
-zombie = objectbase.ObjectBase('pic/zombie/0/%d.png',0,(1280,200),(100, 128),15)
+zombie = zombiebase.ZombieBase('pic/zombie/0/%d.png',0,(1280,200),(100, 128),15)
 while True:
 
     for event in pygame.event.get():
