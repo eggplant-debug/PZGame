@@ -19,7 +19,6 @@ while True:
             #R G B
     DS.fill((255, 0, 255))
     img.draw(DS)
-    zombie.doleft(0.3)
+    zombie.update()
     zombie.draw(DS)
-    zombie.updateIndex((zombie.pathIndex+1)%15)
     pygame.display.update()
