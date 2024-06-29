@@ -23,5 +23,14 @@ data={
         'SIZE':(80,80),
         'SPEED':(0,2)
 
+    },
+    3:{
+        'PATH':'pic/plant/sunflower/%d.png',
+        'IMAGE_INDEX_COUNT':19,
+        'IMAGE_INDEX_CD':0.07,
+        'POSITION_CD':10000,
+        'SIZE':(128,128),
+        'SPEED':(0,0)
     }
+
 }
