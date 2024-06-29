@@ -50,6 +50,9 @@ class ObjectBase(image.Image):
         self.updateIndex(idx)
 
         pass
+    
+    def getSpeed(self):
+        return self.getData()['SPEED']
 
 
     def checkPosition(self):
@@ -59,6 +62,8 @@ class ObjectBase(image.Image):
         if(time.time()-self.prePostime) < self.getPositionCD():
             return False
         self.prePostime=time.time()
+        
+        self.pos=(self.pos[0]+self.getSpeed()[0],self.pos[1]+self.getSpeed()[1])
         
         return True
 
