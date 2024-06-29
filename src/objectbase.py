@@ -1,17 +1,32 @@
 import time
 import image
+import data_object
 class ObjectBase(image.Image):
-    def __init__(self, pathFmt, pathIndex, pos, size=None, pathIndexCount=0):
-        super(ObjectBase, self).__init__(pathFmt, pathIndex, pos, size, pathIndexCount)
+    def __init__(self, id, pos):
         self.preIndextime = 0
         self.prePostime=0
-    
+        self.id = id
+
+        super(ObjectBase, self).__init__(
+            self.getData()['PATH'],
+            0,
+            pos,
+            self.getData()['SIZE'], 
+            self.getData()['IMAGE_INDEX_COUNT'])
+
+    def getData(self):
+        return data_object.data[self.id]
+
 
     def getPositionCD(self):
         """
         给子类提供类似接口
         """
-        pass
+        return self.getData()['POSITION_CD']
+    
+
+    def getImageIndexCD(self):
+        return self.getData()['IMAGE_INDEX_CD']
 
     def update(self):
         """
@@ -20,13 +35,12 @@ class ObjectBase(image.Image):
         self.checkImageIndex()
         self.checkPosition()    
 
-
     
     def checkImageIndex(self):
         """
         自驱动帧动画
         """
-        if(time.time()-self.preIndextime)<0.2:
+        if(time.time()-self.preIndextime)<self.getImageIndexCD():
             return
         self.preIndextime=time.time()
         idx = self.pathIndex+1

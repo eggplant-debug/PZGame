@@ -1,0 +1,16 @@
+data={
+    0:{
+        'PATH':'pic/other/peabullet.png',
+        'IMAGE_INDEX_COUNT':0,
+        'IMAGE_INDEX_CD':0,
+        'POSITION_CD':0.008,
+        'SIZE':(44,44)
+    },
+    1:{
+        'PATH':'pic/zombie/0/%d.png',
+        'IMAGE_INDEX_COUNT':15,
+        'IMAGE_INDEX_CD':0.2,
+        'POSITION_CD':0.2,
+        'SIZE':(100,128)
+    }
+}

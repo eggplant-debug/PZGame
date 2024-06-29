@@ -10,8 +10,8 @@ pygame.init()
 # 创建窗口
 DS = pygame.display.set_mode(GAME_SIZE)
 img = image.Image(PATH_BACK,0,(0,0),GAME_SIZE,0)
-zombie = zombiebase.ZombieBase('pic/zombie/0/%d.png',0,(1280,200),(100, 128),15)
-Peabullet =peabullet.PeaBulletBase('pic/other/peabullet.png',0,(0,200),(100, 100),0)
+zombie = zombiebase.ZombieBase(1,(1280,200))
+Peabullet =peabullet.PeaBulletBase(0,(0,200))
 while True:
 
     for event in pygame.event.get():
