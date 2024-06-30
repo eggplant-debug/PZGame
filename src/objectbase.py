@@ -6,6 +6,7 @@ class ObjectBase(image.Image):
         self.preIndextime = 0
         self.prePostime=0
         self.id = id
+        self.preSummontime=0
 
         super(ObjectBase, self).__init__(
             self.getData()['PATH'],
@@ -17,6 +18,8 @@ class ObjectBase(image.Image):
     def getData(self):
         return data_object.data[self.id]
 
+    def getSummonTimeCD(self):
+        return self.getData()['SUMMON_CD']
 
     def getPositionCD(self):
         """
@@ -34,8 +37,20 @@ class ObjectBase(image.Image):
         """
         self.checkImageIndex()
         self.checkPosition()    
+        self.checkSummon()
 
+    def checkSummon(self):
+        """
+        自驱动召唤动画
+        """
+        if(time.time()-self.preSummontime)<self.getSummonTimeCD():
+            return
+        self.preSummontime=time.time()
+        self.preSummon()
     
+    def preSummon(self):
+        pass
+        
     def checkImageIndex(self):
         """
         自驱动帧动画

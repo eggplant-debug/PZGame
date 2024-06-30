@@ -15,7 +15,13 @@ img = image.Image(PATH_BACK,0,(0,0),GAME_SIZE,0)
 zombie = zombiebase.ZombieBase(1,(1280,200))
 Peabullet =peabullet.PeaBulletBase(0,(0,200))
 Sunlight = sunlight.SunLightBase(2,(200,300))
-sl = sunflower.SunFlower(3,(100,200))
+
+sfList = []
+for i in range(GRID_COUNT[0]):
+    for j in range(GRID_COUNT[1]):
+        pos = LEFT_TOP[0]+i*GRID_SIZE[0],LEFT_TOP[1]+j*GRID_SIZE[1]
+        sf = sunflower.SunFlower(3,pos)
+        sfList.append(sf)
 while True:
 
     for event in pygame.event.get():
@@ -33,6 +39,7 @@ while True:
     Sunlight.update()
     Sunlight.draw(DS)
 
-    sl.update()
-    sl.draw(DS)
+    for sf in sfList:
+        sf.update()
+        sf.draw(DS)
     pygame.display.update()
