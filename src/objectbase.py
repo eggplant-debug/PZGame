@@ -68,7 +68,9 @@ class ObjectBase(image.Image):
     
     def getSpeed(self):
         return self.getData()['SPEED']
-
+    
+    def checkCanLoot(self):
+        return self.getData()['CAN_LOOT']
 
     def checkPosition(self):
         """

@@ -21,6 +21,8 @@ while True:
             pygame.quit()
             sys.exit()
             #R G B
+        elif event.type==pygame.MOUSEBUTTONDOWN:
+            game.mouseClickHandler(event.button)
             
     DS.fill((255, 0, 255))
     
