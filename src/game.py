@@ -2,6 +2,7 @@ from const import *
 import image
 import sunflower
 import pygame
+import data_object
 class Game(object):
     def __init__(self,ds) -> None:
         self.ds = ds
@@ -11,8 +12,11 @@ class Game(object):
                                 pathIndexCount=0)
         self.plants= []
         self.summons=[]
+        self.gold=100
         # 二维矩阵，是否有植物
         self.hasPlants=[]
+
+        self.goldFont = pygame.font.Font(None, 60)
         for i in range(GRID_COUNT[0]):
             col = []
             for j in range(GRID_COUNT[1]):
@@ -25,6 +29,13 @@ class Game(object):
         y=(pos[1]-LEFT_TOP[1])//GRID_SIZE[1]
         return x,y
     
+    def renderFont(self):
+        textimage=self.goldFont.render("Gold:"+str(self.gold),True,(0,0,0))
+        self.ds.blit(textimage,(13,20))
+
+        textimage=self.goldFont.render("Gold:"+str(self.gold),True,(255,255,255))
+        self.ds.blit(textimage,(10,20))
+
     def draw(self):
         self.back.draw(self.ds)
         for plant in self.plants:
@@ -32,7 +43,10 @@ class Game(object):
         for summon in self.summons:
             summon.draw(self.ds)
 
+        self.renderFont()
+
     def update(self):
+        print("gold:",self.gold)
         self.back.update(self.ds)
         for plant in self.plants:
             plant.update()
@@ -68,14 +82,19 @@ class Game(object):
             rect = summon.getRect()
             if rect.collidepoint(mousePos):
                 self.summons.remove(summon)
+                self.gold+=summon.getPrice()
                 return True
         return False
             
 
 
-    def checkAddPlant(self,mousePos,PlantId):
+    def checkAddPlant(self,mousePos,objId):
         x,y = self.getIndexByPos(mousePos)
-        if PlantId == SUNFLOWER_ID:
+
+        if self.gold<data_object.data[objId]['PRICE']:
+            return
+        self.gold -= data_object.data[objId]['PRICE']
+        if objId == SUNFLOWER_ID:
             self.addSunFlower(x,y)
 
 

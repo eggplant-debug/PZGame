@@ -7,7 +7,8 @@ data={
         'SIZE':(44,44),
         'SUMMON_CD':-1,
         'SPEED':(4,0),
-        'CAN_LOOT':False
+        'CAN_LOOT':False,
+        'PRICE':0
     },
     1:{
         'PATH':'pic/zombie/0/%d.png',
@@ -17,7 +18,9 @@ data={
         'SIZE':(100,128),
         'SUMMON_CD':-1,
         'SPEED':(-2.5,0),
-        'CAN_LOOT':False
+        'CAN_LOOT':False,
+        'PRICE':0
+
 
     },
     2:{
@@ -28,7 +31,8 @@ data={
         'SIZE':(80,80),
         'SUMMON_CD':-1,
         'SPEED':(0,2),
-        'CAN_LOOT':True
+        'CAN_LOOT':True,
+        'PRICE':5
 
 
     },
@@ -40,7 +44,8 @@ data={
         'SIZE':(128,128),
         'SUMMON_CD':8,
         'SPEED':(0,0),
-        'CAN_LOOT':False
+        'CAN_LOOT':False,
+        'PRICE':30
     }
 
 }

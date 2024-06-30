@@ -50,7 +50,11 @@ class ObjectBase(image.Image):
     
     def preSummon(self):
         pass
-        
+    
+    def getPrice(self):
+        return self.getData()['PRICE']
+
+
     def checkImageIndex(self):
         """
         自驱动帧动画
