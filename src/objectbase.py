@@ -82,4 +82,9 @@ class ObjectBase(image.Image):
         
         return True
 
+    def hasSummon(self):
+        pass
+
+    def doSummon(self):
+        pass
         
