@@ -2,6 +2,9 @@ from const import *
 import image
 import sunflower
 import pygame
+import time
+import random
+import zombiebase
 import data_object
 import peashooter
 class Game(object):
@@ -12,10 +15,12 @@ class Game(object):
                                 size=GAME_SIZE,
                                 pathIndexCount=0)
         self.plants= []
+        self.zombies=[]
         self.summons=[]
         self.gold=100
         # 二维矩阵，是否有植物
         self.hasPlants=[]
+        self.zombieGenerateTime=0
 
         self.goldFont = pygame.font.Font(None, 60)
         for i in range(GRID_COUNT[0]):
@@ -45,6 +50,8 @@ class Game(object):
             plant.draw(self.ds)
         for summon in self.summons:
             summon.draw(self.ds)
+        for zom in self.zombies:
+            zom.draw(self.ds)
 
         self.renderFont()
 
@@ -58,6 +65,21 @@ class Game(object):
                 self.summons.append(summ)
         for summon in self.summons:
             summon.update()
+        
+        for zom in self.zombies:
+            zom.update()
+
+        # 僵尸时间检查
+        if time.time()-self.zombieGenerateTime>ZOMIE_GENERATE_TIME:
+            self.zombieGenerateTime=time.time()
+            self.addZombie(ZOMIE_BORN_X,random.randint(0,GRID_COUNT[1]-1))
+    
+    def addZombie(self,x,y):
+        pos = LEFT_TOP[0]+x*GRID_SIZE[0],LEFT_TOP[1]+y*GRID_SIZE[1]
+        zm = zombiebase.ZombieBase(1,pos)
+        self.zombies.append(zm)
+
+        
 
     def addSunFlower(self,x,y):
         """
