@@ -3,6 +3,7 @@ import image
 import sunflower
 import pygame
 import data_object
+import peashooter
 class Game(object):
     def __init__(self,ds) -> None:
         self.ds = ds
@@ -22,6 +23,8 @@ class Game(object):
             for j in range(GRID_COUNT[1]):
                 col.append(0)
             self.hasPlants.append(col)
+
+        self.addPeaShooter(1,1) 
 
      
     def getIndexByPos(self,pos):
@@ -60,19 +63,22 @@ class Game(object):
         """
         抽离出添加向日葵的逻辑，为后面鼠标响应事件做打算
         """
-        if x<0 or x>=GRID_COUNT[0]:
-            return
-        if y<0 or y>=GRID_COUNT[1]:
-            return
-
-
-        if self.hasPlants[x][y]==1:
-            return
+       
         pos = LEFT_TOP[0]+x*GRID_SIZE[0],LEFT_TOP[1]+y*GRID_SIZE[1]
         sf = sunflower.SunFlower(SUNFLOWER_ID,pos)
         self.plants.append(sf)
         self.hasPlants[x][y]=1
 
+    def addPeaShooter(self,x,y):
+        """
+        抽离出添加向日葵的逻辑，为后面鼠标响应事件做打算
+        """
+       
+        pos = LEFT_TOP[0]+x*GRID_SIZE[0],LEFT_TOP[1]+y*GRID_SIZE[1]
+        sf = peashooter.PeaShooter(PEASHOOTER_ID,pos)
+        self.plants.append(sf)
+        self.hasPlants[x][y]=1
+    
         
     
     def checkLoot(self,mousePos):
@@ -90,9 +96,20 @@ class Game(object):
 
     def checkAddPlant(self,mousePos,objId):
         x,y = self.getIndexByPos(mousePos)
-
+        """
+        return 的逻辑最好全放在一起
+        
+        """
         if self.gold<data_object.data[objId]['PRICE']:
             return
+        if x<0 or x>=GRID_COUNT[0]:
+            return
+        if y<0 or y>=GRID_COUNT[1]:
+            return
+        if self.hasPlants[x][y]==1:
+            return
+        
+        
         self.gold -= data_object.data[objId]['PRICE']
         if objId == SUNFLOWER_ID:
             self.addSunFlower(x,y)

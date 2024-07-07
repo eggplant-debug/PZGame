@@ -46,6 +46,18 @@ data={
         'SPEED':(0,0),
         'CAN_LOOT':False,
         'PRICE':30
-    }
+    },
+    4:{
+        'PATH':'pic/plant/peashooter/%d.png',
+        'IMAGE_INDEX_COUNT':15,
+        'IMAGE_INDEX_CD':0.15,
+        'POSITION_CD':10000,
+        'SIZE':(128,128),
+        'SUMMON_CD':3,
+        'SPEED':(0,0),
+        'CAN_LOOT':False,
+        'PRICE':20
+    },
+   
 
 }
