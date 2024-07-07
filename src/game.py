@@ -69,6 +69,7 @@ class Game(object):
         self.plants.append(sf)
         self.hasPlants[x][y]=1
 
+
     def addPeaShooter(self,x,y):
         """
         抽离出添加向日葵的逻辑，为后面鼠标响应事件做打算
@@ -113,6 +114,9 @@ class Game(object):
         self.gold -= data_object.data[objId]['PRICE']
         if objId == SUNFLOWER_ID:
             self.addSunFlower(x,y)
+        elif objId == PEASHOOTER_ID:
+            self.addPeaShooter(x,y)
+        
 
 
     def mouseClickHandler(self,btn):
@@ -122,3 +126,6 @@ class Game(object):
         if btn == 1:
 
             self.checkAddPlant(mousePos,SUNFLOWER_ID)
+
+        elif btn == 2:
+            self.checkAddPlant(mousePos,PEASHOOTER_ID)
