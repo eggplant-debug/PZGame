@@ -28,6 +28,7 @@ while True:
     
     game.update()
     game.draw()
+    
 
     pygame.display.update()
 

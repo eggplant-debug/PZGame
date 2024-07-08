@@ -18,11 +18,16 @@ class Game(object):
         self.zombies=[]
         self.summons=[]
         self.gold=100
+        self.goldFont = pygame.font.Font(None, 60)
+
+        self.killedZombie = 0
+        self.zombieFont = pygame.font.Font(None, 60)
+
+
         # 二维矩阵，是否有植物
         self.hasPlants=[]
         self.zombieGenerateTime=0
 
-        self.goldFont = pygame.font.Font(None, 60)
         for i in range(GRID_COUNT[0]):
             col = []
             for j in range(GRID_COUNT[1]):
@@ -43,6 +48,14 @@ class Game(object):
 
         textimage=self.goldFont.render("Gold:"+str(self.gold),True,(255,255,255))
         self.ds.blit(textimage,(10,20))
+
+
+        textimage=self.zombieFont.render("Score:"+str(self.killedZombie),True,(0,0,0))
+        self.ds.blit(textimage,(13,60))
+
+        textimage=self.zombieFont.render("Score:"+str(self.killedZombie),True,(255,255,255))
+        self.ds.blit(textimage,(10,60))
+
 
     def draw(self):
         self.back.draw(self.ds)
@@ -75,6 +88,15 @@ class Game(object):
             self.addZombie(ZOMIE_BORN_X,random.randint(0,GRID_COUNT[1]-1))
 
         self.checkSummonVSZombie()
+
+        for summon in self.summons:
+            if summon.getRect().x>GAME_SIZE[0] or summon.getRect().y>GAME_SIZE[1]:
+                self.summons.remove(summon)
+
+                # 思考下为啥要break 
+                break
+            
+
     def checkSummonVSZombie(self):
         for summon in self.summons:
             for zom in self.zombies:
@@ -82,6 +104,8 @@ class Game(object):
                     self.fight(summon,zom)
                     if zom.hp<=0:
                         self.zombies.remove(zom)
+                        self.killedZombie+=1
+                        
                     if summon.hp<=0:
                         self.summons.remove(summon)
 
