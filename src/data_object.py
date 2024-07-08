@@ -19,7 +19,7 @@ data={
         'POSITION_CD':0.2,
         'SIZE':(100,128),
         'SUMMON_CD':-1,
-        'SPEED':(-2.5,0),
+        'SPEED':(-24.5,0),
         'CAN_LOOT':False,
         'PRICE':0,
         'HP':5,

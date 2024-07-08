@@ -14,6 +14,12 @@ class Game(object):
                                 pos=(0,0),
                                 size=GAME_SIZE,
                                 pathIndexCount=0)
+        
+        self.lose = image.Image(PATH_LOSE,0,
+                                pos=(0,0),
+                                size=GAME_SIZE,
+                                pathIndexCount=0)
+        self.isGameOver = False
         self.plants= []
         self.zombies=[]
         self.summons=[]
@@ -68,6 +74,9 @@ class Game(object):
 
         self.renderFont()
 
+        if self.isGameOver:
+            self.lose.draw(self.ds)
+
     def update(self):
         print("gold:",self.gold)
         self.back.update(self.ds)
@@ -88,6 +97,12 @@ class Game(object):
             self.addZombie(ZOMIE_BORN_X,random.randint(0,GRID_COUNT[1]-1))
 
         self.checkSummonVSZombie()
+        self.checkZombieVSPlant()
+
+
+        for zom in self.zombies:
+            if zom.getRect().x<0:
+                self.isGameOver=True
 
         for summon in self.summons:
             if summon.getRect().x>GAME_SIZE[0] or summon.getRect().y>GAME_SIZE[1]:
@@ -96,6 +111,17 @@ class Game(object):
                 # 思考下为啥要break 
                 break
             
+    def checkZombieVSPlant(self):
+        for zom in self.zombies:
+            for plant in self.plants:
+                if zom.isCollide(plant):
+                    self.fight(zom,plant)
+                    if plant.hp<=0:
+                        self.plants.remove(plant)
+
+
+
+
 
     def checkSummonVSZombie(self):
         for summon in self.summons:
@@ -192,6 +218,9 @@ class Game(object):
         return False
 
     def mouseClickHandler(self,btn):
+        if self.isGameOver:
+            return 
+
         mousePos = pygame.mouse.get_pos()
         if self.checkLoot(mousePos):
             return
