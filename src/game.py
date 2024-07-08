@@ -7,6 +7,9 @@ import random
 import zombiebase
 import data_object
 import peashooter
+import asyncio
+import asyncclient
+
 class Game(object):
     def __init__(self,ds) -> None:
         self.ds = ds
@@ -40,7 +43,8 @@ class Game(object):
                 col.append(0)
             self.hasPlants.append(col)
 
-        self.addPeaShooter(1,1) 
+
+        self.client = asyncclient.AsyncClient(SERVER_IP,SERVER_PORT)
 
      
     def getIndexByPos(self,pos):
@@ -227,6 +231,8 @@ class Game(object):
         if btn == 1:
 
             self.checkAddPlant(mousePos,SUNFLOWER_ID)
+
+            asyncio.run(self.client.c2s({"type":0,"pos":self.getIndexByPos(mousePos)}))
 
         elif btn == 2:
             self.checkAddPlant(mousePos,PEASHOOTER_ID)
