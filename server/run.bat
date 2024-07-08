@@ -1,1 +1,1 @@
-python main.py
+C:\Users\18391\AppData\Local\Programs\Python\Python39\python main.py
