@@ -8,7 +8,9 @@ data={
         'SUMMON_CD':-1,
         'SPEED':(4,0),
         'CAN_LOOT':False,
-        'PRICE':0
+        'PRICE':0,
+        'HP':1,
+        'ATTACK':1,
     },
     1:{
         'PATH':'pic/zombie/0/%d.png',
@@ -19,7 +21,9 @@ data={
         'SUMMON_CD':-1,
         'SPEED':(-2.5,0),
         'CAN_LOOT':False,
-        'PRICE':0
+        'PRICE':0,
+        'HP':5,
+        'ATTACK':1,
 
 
     },
@@ -32,7 +36,9 @@ data={
         'SUMMON_CD':-1,
         'SPEED':(0,2),
         'CAN_LOOT':True,
-        'PRICE':5
+        'PRICE':5,
+        'HP':10000,
+        'ATTACK':0,
 
 
     },
@@ -45,7 +51,9 @@ data={
         'SUMMON_CD':8,
         'SPEED':(0,0),
         'CAN_LOOT':False,
-        'PRICE':30
+        'PRICE':30,
+        'HP':5,
+        'ATTACK':0,
     },
     4:{
         'PATH':'pic/plant/peashooter/%d.png',
@@ -56,8 +64,12 @@ data={
         'SUMMON_CD':3,
         'SPEED':(0,0),
         'CAN_LOOT':False,
-        'PRICE':20
+        'PRICE':20,
+        'HP':5,
+        'ATTACK':0,
     },
+
+    
    
 
 }

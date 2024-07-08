@@ -6,6 +6,8 @@ class ObjectBase(image.Image):
         self.preIndextime = 0
         self.prePostime=0
         self.id = id
+        self.hp = self.getData()['HP']
+        self.attk = self.getData()['ATTACK']
         self.preSummontime=0
 
         super(ObjectBase, self).__init__(
@@ -14,6 +16,11 @@ class ObjectBase(image.Image):
             pos,
             self.getData()['SIZE'], 
             self.getData()['IMAGE_INDEX_COUNT'])
+
+
+    def isCollide(self, other):
+        return self.getRect().colliderect(other.getRect())
+
 
     def getData(self):
         return data_object.data[self.id]

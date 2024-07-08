@@ -73,7 +73,25 @@ class Game(object):
         if time.time()-self.zombieGenerateTime>ZOMIE_GENERATE_TIME:
             self.zombieGenerateTime=time.time()
             self.addZombie(ZOMIE_BORN_X,random.randint(0,GRID_COUNT[1]-1))
+
+        self.checkSummonVSZombie()
+    def checkSummonVSZombie(self):
+        for summon in self.summons:
+            for zom in self.zombies:
+                if summon.isCollide(zom):
+                    self.fight(summon,zom)
+                    if zom.hp<=0:
+                        self.zombies.remove(zom)
+                    if summon.hp<=0:
+                        self.summons.remove(summon)
+
+                    return
+                
     
+
+
+
+
     def addZombie(self,x,y):
         pos = LEFT_TOP[0]+x*GRID_SIZE[0],LEFT_TOP[1]+y*GRID_SIZE[1]
         zm = zombiebase.ZombieBase(1,pos)
@@ -139,7 +157,15 @@ class Game(object):
         elif objId == PEASHOOTER_ID:
             self.addPeaShooter(x,y)
         
-
+    def fight(self,a,b):
+        while True:
+            a.hp -= b.attk
+            b.hp -= a.attk
+            if a.hp<=0:
+                return False
+            if b.hp<=0:
+                return True
+        return False
 
     def mouseClickHandler(self,btn):
         mousePos = pygame.mouse.get_pos()
