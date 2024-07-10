@@ -1,5 +1,14 @@
 import pygame
+import os 
 import sys
+
+current_path = os.path.dirname(os.path.realpath(__file__))
+print(current_path)
+
+top_path = os.path.dirname(current_path)
+sys.path.append(top_path)
+
+
 import image
 from const import *
 import zombiebase

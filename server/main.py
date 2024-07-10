@@ -1,6 +1,6 @@
 import asyncio
 import const
-
+from ..share.const import *
 async def handle_client(reader, writer):
     data=await reader.read(const.MAX_BYTES)
     print(data)

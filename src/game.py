@@ -9,7 +9,7 @@ import data_object
 import peashooter
 import asyncio
 import asyncclient
-
+from share.const import *
 class Game(object):
     def __init__(self,ds) -> None:
         self.ds = ds
@@ -232,7 +232,7 @@ class Game(object):
 
             self.checkAddPlant(mousePos,SUNFLOWER_ID)
 
-            asyncio.run(self.client.c2s({"type":0,"pos":self.getIndexByPos(mousePos)}))
+            asyncio.run(self.client.c2s({"type":C2S_ADD_FLOWER,"pos":self.getIndexByPos(mousePos)}))
 
         elif btn == 2:
             self.checkAddPlant(mousePos,PEASHOOTER_ID)
