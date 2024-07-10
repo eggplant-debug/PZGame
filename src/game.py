@@ -44,7 +44,7 @@ class Game(object):
             self.hasPlants.append(col)
 
 
-        self.client = asyncclient.AsyncClient(SERVER_IP,SERVER_PORT)
+        self.client = asyncclient.AsyncClient(self,SERVER_IP,SERVER_PORT)
 
      
     def getIndexByPos(self,pos):
@@ -189,8 +189,8 @@ class Game(object):
             
 
 
-    def checkAddPlant(self,mousePos,objId):
-        x,y = self.getIndexByPos(mousePos)
+    def checkAddPlant(self,pos,objId):
+        x,y = pos
         """
         return 的逻辑最好全放在一起
         
@@ -235,4 +235,4 @@ class Game(object):
             asyncio.run(self.client.c2s({"type":C2S_ADD_FLOWER,"pos":self.getIndexByPos(mousePos)}))
 
         elif btn == 2:
-            self.checkAddPlant(mousePos,PEASHOOTER_ID)
+            self.checkAddPlant(self.getIndexByPos(mousePos),PEASHOOTER_ID)

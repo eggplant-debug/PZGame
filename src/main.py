@@ -27,7 +27,7 @@ while True:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
+            pygame.quit() 
             sys.exit()
             #R G B
         elif event.type==pygame.MOUSEBUTTONDOWN:
